@@ -7,6 +7,7 @@ Para realizar a conversão do comentário de texto para áudio, o candidato deve
 As operações de cadastro e atualização da lista de comentários devem ser realizadas via AJAX.
 
 Abaixo disponibilizamos um mockup do que é esperado como interface:
+![](images/mockup.png)
 
 ## Observações
 - O candidato poderá utilizar os frameworks que desejar, contanto que tenham como base Node.js e MySQL.
