@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #CDCDCD;
+    font-size: 14px;
+    font-family: arial, monospace;
+}
+
+.container {
+    width: 90%;
+    display: flex;
+    margin: auto auto;
+
+    border: 1px solid black;
+}
+
+.col-6 {
+    width: 50%;
+    padding: 3rem;
+    border: 1px solid black;
+}
+
+#formComentario {
+    display: block;
+}
+
+#formComentario textarea {
+    width: 100%;
+    padding: 0.5rem;
+    resize: none;
+}
+
+#formComentario button {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: darkgray;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 0.5rem 0.35rem;
+}
+

@@ -1,6 +1,8 @@
 const express = require('express');
+const expressBrowserify = require('express-browserify');
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
+const path = require('path');
 const fs = require("fs");
 
 const textToSpeech = new TextToSpeechV1({
@@ -20,8 +22,13 @@ const synthesizeParams = {
 const app = express();
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'views')))
 
 app.get('/', (request, response) =>{
+    response.render('index.html')
+});
+
+app.post('/', () => {
     textToSpeech.synthesize(synthesizeParams)
         .then(response => {
             console.log('aqui')
