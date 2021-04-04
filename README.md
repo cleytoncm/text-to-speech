@@ -62,3 +62,4 @@ Acesse o servidor por:
     - Sucesso
     - Erro
 - Validar criação do áudio
+- Aplicar estilização
