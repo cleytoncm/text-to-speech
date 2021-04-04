@@ -18,7 +18,7 @@ const textToSpeech = new TextToSpeechV1({
 });
 
 const sequelize = new Sequelize(config);
-const { Comentario } = require('../models');
+const { Comentario } = require('./models');
 
 try {
     sequelize.authenticate();
@@ -39,7 +39,7 @@ app.post('/', async (request, response) => {
 
     const { descricao } = request.body;
 
-    if (descricao.length < 30) {
+    if (descricao.length < 20) {
         return response.status(400).json({ error: 'Necessário ao menos 30 caracteres para um comentário!' })
     }
 

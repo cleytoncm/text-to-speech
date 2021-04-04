@@ -29,7 +29,7 @@ Oculta os logs (Para encerrar o container use o comando `docker-compose down`)
     docker-compose up -d
 ```
 
-### Iniciando dependecias
+### Iniciando dependências
 ```
     yarn install
 ```
@@ -42,3 +42,23 @@ Criando tabela
 ```
      npx sequelize db:migrate
 ```
+
+Executando o servidor
+```
+    nodemon
+```
+
+Acesse o servidor por:
+```
+    http://localhost:3333
+```
+
+
+
+### [TODO]
+
+- Validar envio do comentário
+- Exibir mensagens de retorno
+    - Sucesso
+    - Erro
+- Validar criação do áudio

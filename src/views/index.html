@@ -9,18 +9,78 @@
     <div class="container">
         <div class="col-6">
             <h2>Comentário</h2>
-            <form action="" id="formComentario">
-                <textarea name="comentario" id="comentario"></textarea>
+            <form action="" id="formComentario" enctype="multipart/form-data">
+                <textarea name="descricao" id="descricao"></textarea>
                 <button class="submit">Cadastrar</button>
             </form>
         </div>
         <div class="col-6">
             <h2>Comentários</h2>
-            <div id="comentario_1">
-                Oi mundo!
-            </div>
-            <button>Ouvir</button>
+            <div id="comentarios"></div>
         </div>
     </div>
+    <audio src="" id="audio"></audio>
+    <template id="comentario">
+        <div class="linha">
+            <div></div>
+            <div>
+                <button class="ouvir">Ouvir</button>
+            </div>
+        </div>
+    </template>
 </body>
+<script>
+    window.addEventListener('load', async (event) => {
+        const baseURL = 'http://localhost:3333';
+        await fetch(baseURL + '/listagem')
+            .then((response) => response.json())
+            .then((data) => {
+                data.forEach((comentario) => {
+                    carregarComentario(comentario);
+               })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+        document.getElementById('formComentario').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            let descricao = document.getElementById('descricao').value
+
+            await fetch(baseURL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({descricao})
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    carregarComentario(data)
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        });
+    });
+
+    function carregarComentario(comentario) {
+        let comentarios = document.getElementById('comentarios');
+        let template = document.getElementById('comentario');
+        let linha = template.content.querySelector('.linha');
+
+        linha.querySelector('div:first-child').textContent = comentario.descricao;
+        linha.querySelector('button').setAttribute('data-audio', 'audio/' + comentario.id + '.mp3');
+
+        comentarios.appendChild(document.importNode(template.content, true));
+
+        document.querySelectorAll('.ouvir').forEach((ouvir) => {
+            ouvir.addEventListener('click', async () => {
+                document.getElementById('audio').setAttribute('src', ouvir.getAttribute('data-audio'));
+                await document.getElementById('audio').play();
+            });
+        });
+    }
+</script>
 </html>
