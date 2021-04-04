@@ -13,3 +13,19 @@ Abaixo disponibilizamos um mockup do que é esperado como interface:
 - O candidato poderá utilizar os frameworks que desejar, contanto que tenham como base Node.js e MySQL.
 - O candidato deverá criar uma conta free na IBM para consumir a API Text to Speech.
 - Organização do código e qualidade da interface desenvolvida serão avaliadas.
+
+
+## Iniciando o projeto
+
+### Subindo o banco de dados MySQL
+Execute um dos comandos abaixo no terminal para executar o container do banco de dados.
+
+Exibe os logs (O terminal fica travado na exibição dos logs, use CTRL+C para encerrar o container)
+```
+    docker-compose up
+```
+Oculta os logs (Para encerrar o container use o comando `docker-compose down`)
+```
+    docker-compose up -d
+```
+
