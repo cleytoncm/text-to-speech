@@ -9,17 +9,18 @@
     <div class="container">
         <div class="col-6">
             <h2>Comentário</h2>
-            <form action="" id="formComentario" enctype="multipart/form-data">
-                <textarea name="descricao" id="descricao"></textarea>
+            <form action="" id="formComentario">
+                <textarea name="descricao" id="descricao" required></textarea>
                 <button class="submit">Cadastrar</button>
             </form>
+            <div id="message"></div>
         </div>
         <div class="col-6">
             <h2>Comentários</h2>
             <div id="comentarios"></div>
         </div>
     </div>
-    <audio src="" id="audio"></audio>
+    <audio src="" id="audio" preload="none"></audio>
     <template id="comentario">
         <div class="linha">
             <div></div>
@@ -78,7 +79,9 @@
         document.querySelectorAll('.ouvir').forEach((ouvir) => {
             ouvir.addEventListener('click', async () => {
                 document.getElementById('audio').setAttribute('src', ouvir.getAttribute('data-audio'));
-                await document.getElementById('audio').play();
+                await document.getElementById('audio').play().then(() => {
+                    console.log('tocando')
+                });
             });
         });
     }

@@ -1,7 +1,6 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
     background-color: #CDCDCD;
     font-size: 14px;
     font-family: arial, monospace;
@@ -10,23 +9,35 @@ html, body {
 .container {
     width: 90%;
     display: flex;
-    margin: auto auto;
-
-    border: 1px solid black;
+    margin: 2rem auto;
+    height: 90vh;
+    justify-content: center;
 }
 
 .col-6 {
     width: 50%;
+    max-width: 600px;
     padding: 3rem;
-    border: 1px solid black;
+}
+
+.col-6:first-child {
+    border-right: 2px solid #BEBEBE;
+}
+
+button {
+    background-color: #a0a0a0;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 #formComentario {
-    display: block;
+    width: auto;
 }
 
 #formComentario textarea {
+    box-sizing: border-box;
     width: 100%;
+    min-height: 12rem;
     padding: 0.5rem;
     resize: none;
 }
@@ -34,9 +45,21 @@ html, body {
 #formComentario button {
     width: 100%;
     margin-top: 1rem;
-    background-color: darkgray;
-    font-weight: bold;
-    border-radius: 5px;
     padding: 0.5rem 0.35rem;
+}
+
+.linha {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.linha div {
+    line-height: 2rem;
+}
+
+.linha button {
+    padding: 0.2rem 1.5rem;
+    margin-left: 1rem;
 }
 

@@ -52,14 +52,3 @@ Acesse o servidor por:
 ```
     http://localhost:3333
 ```
-
-
-
-### [TODO]
-
-- Validar envio do comentário
-- Exibir mensagens de retorno
-    - Sucesso
-    - Erro
-- Validar criação do áudio
-- Aplicar estilização
