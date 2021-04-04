@@ -7,7 +7,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "express-browserify": "^1.0.3",
     "ibm-watson": "^6.0.3",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2"

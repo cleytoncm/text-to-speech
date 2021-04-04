@@ -1,5 +1,4 @@
 const express = require('express');
-const expressBrowserify = require('express-browserify');
 
 const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -18,18 +17,11 @@ const textToSpeech = new TextToSpeechV1({
     disableSslVerification: true
 });
 
-const synthesizeParams = {
-    text: 'Oi meu Brasil baronio',
-    accept: 'audio/mp3',
-    voice: 'pt-BR_IsabelaVoice',
-};
-
 const sequelize = new Sequelize(config);
 const { Comentario } = require('../models');
 
 try {
     sequelize.authenticate();
-    console.log('Connection has been established successfully.');
 } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
@@ -45,24 +37,32 @@ app.get('/', async (request, response) =>{
 
 app.post('/', async (request, response) => {
 
-    console.log(request.body);
+    const { descricao } = request.body;
 
-    const comentario = await Comentario.create(request.body);
+    if (descricao.length < 30) {
+        return response.status(400).json({ error: 'Necessário ao menos 30 caracteres para um comentário!' })
+    }
 
-    response.json(comentario)
+    const comentario = await Comentario.create({ descricao });
 
+    const synthesizeParams = {
+        text: comentario.descricao,
+        accept: 'audio/mp3',
+        voice: 'pt-BR_IsabelaVoice',
+    };
 
-    // textToSpeech.synthesize(synthesizeParams)
-    //     .then(response => {
-    //         console.log('aqui')
-    //         return textToSpeech.repairWavHeaderStream(response.result);
-    //     })
-    //     .then(buffer => {
-    //         fs.writeFileSync('hello_world.mp3', buffer);
-    //     })
-    //     .catch(err => {
-    //         console.log('error:', err);
-    //     });
+    textToSpeech.synthesize(synthesizeParams)
+        .then(response => {
+            return textToSpeech.repairWavHeaderStream(response.result);
+        })
+        .then(buffer => {
+            fs.writeFileSync(path.join(__dirname, 'views', 'audio', + comentario.id + '.mp3'), buffer);
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
+
+    return response.json(comentario)
 });
 
 app.listen(3333, () => {
