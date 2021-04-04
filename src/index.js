@@ -65,6 +65,10 @@ app.post('/', async (request, response) => {
     return response.json(comentario)
 });
 
+app.get('/listagem', async (request, response) => {
+    return response.json(await Comentario.findAll());
+});
+
 app.listen(3333, () => {
     console.log('Funcionando na porta 3333')
 });
