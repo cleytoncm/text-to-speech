@@ -4,9 +4,10 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 const path = require('path');
 const fs = require("fs");
 
-class IBMWatson {
-
-    constructor(comentario) {
+class IBMWatson
+{
+    constructor(comentario)
+    {
         this.textToSpeech = new TextToSpeechV1({
             authenticator: new IamAuthenticator({
                 apikey: 'HdAt0znXopSb2GJk_QnVld5WtGZeCfksx0RVJYDEQi95'
@@ -22,7 +23,8 @@ class IBMWatson {
         };
     }
 
-    sintetizar(comentario) {
+    sintetizar(comentario)
+    {
         this.textToSpeech.synthesize(this.synthesizeParams)
             .then(response => {
                 return this.textToSpeech.repairWavHeaderStream(response.result);
@@ -34,7 +36,6 @@ class IBMWatson {
                 console.log('error:', err);
             });
     }
-
 }
 
 module.exports = { IBMWatson };

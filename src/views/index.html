@@ -42,12 +42,12 @@
                })
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
 
         document.getElementById('formComentario').addEventListener('submit', async (event) => {
             event.preventDefault();
-            let descricao = document.getElementById('descricao').value
+            let descricao = document.getElementById('descricao').value;
 
             await fetch(baseURL, {
                 method: 'POST',
@@ -59,16 +59,17 @@
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    carregarComentario(data)
-                    carregarMensagem('Comentário cadastrado com sucesso!', 'sucesso')
+                    carregarComentario(data);
+                    carregarMensagem('Comentário cadastrado com sucesso!', 'sucesso');
                 })
                 .catch((error) => {
-                    carregarMensagem(error, 'erro')
+                    carregarMensagem(error, 'erro');
                 });
         });
     });
 
-    function carregarComentario(comentario) {
+    function carregarComentario(comentario)
+    {
         let comentarios = document.getElementById('comentarios');
         let template = document.getElementById('comentario');
         let linha = template.content.querySelector('.linha');
@@ -86,7 +87,8 @@
         });
     }
 
-    function carregarMensagem(msg, classe) {
+    function carregarMensagem(msg, classe)
+    {
         let mensagem = document.getElementById('mensagem');
         mensagem.innerText = msg;
         mensagem.classList.add(classe);

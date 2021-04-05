@@ -7,10 +7,10 @@ const { Comentario } = require('./models');
 const app = express();
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'views')))
+app.use(express.static(path.join(__dirname, 'views')));
 
 app.get('/', async (request, response) =>{
-    response.render('index.html')
+    response.render('index.html');
 });
 
 app.post('/', async (request, response) => {
@@ -38,5 +38,5 @@ app.get('/listagem', async (request, response) => {
 });
 
 app.listen(3333, () => {
-    console.log('Funcionando na porta 3333')
+    console.log('Funcionando na porta 3333');
 });
