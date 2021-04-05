@@ -13,7 +13,7 @@
                 <textarea name="descricao" id="descricao" required></textarea>
                 <button class="submit">Cadastrar</button>
             </form>
-            <div id="message"></div>
+            <div id="mensagem"></div>
         </div>
         <div class="col-6">
             <h2>Comentários</h2>
@@ -59,9 +59,10 @@
                 .then((response) => response.json())
                 .then((data) => {
                     carregarComentario(data)
+                    carregarMensagem('Comentário cadastrado com sucesso!', 'sucesso')
                 })
                 .catch((error) => {
-                    console.log(error)
+                    carregarMensagem(error, 'erro')
                 });
         });
     });
@@ -79,11 +80,24 @@
         document.querySelectorAll('.ouvir').forEach((ouvir) => {
             ouvir.addEventListener('click', async () => {
                 document.getElementById('audio').setAttribute('src', ouvir.getAttribute('data-audio'));
-                await document.getElementById('audio').play().then(() => {
-                    console.log('tocando')
-                });
+                await document.getElementById('audio').play().then(() => {});
             });
         });
+    }
+
+    function carregarMensagem(msg, classe) {
+        let mensagem = document.getElementById('mensagem');
+        mensagem.innerText = msg;
+        mensagem.classList.add(classe);
+
+        document.getElementById('descricao').disabled = true;
+        document.querySelector('.submit').disabled = true;
+
+        setTimeout(() => {
+            document.getElementById('descricao').disabled = false;
+            document.querySelector('.submit').disabled = false;
+            mensagem.classList.remove(classe);
+        }, 2000);
     }
 </script>
 </html>
